@@ -139,7 +139,7 @@ type RemoteConfig struct {
 	// sorted by the server. The 'key' values of the params must be unique.
 	Parameters map[string]RemoteConfigParameter `json:"parameters,omitempty"`
 
-	ParameterGroups map[string]map[string]RemoteConfigParameter `json:"parameterGroups,omitempty"`
+	ParameterGroups map[string]map[string]map[string]RemoteConfigParameter `json:"parameterGroups,omitempty"`
 
 	// ServerResponse contains the HTTP response code and headers from the
 	// server.
