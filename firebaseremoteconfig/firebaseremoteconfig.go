@@ -315,7 +315,7 @@ type RemoteConfigParameterValue struct {
 	UseInAppDefault bool `json:"useInAppDefault,omitempty"`
 
 	// Value: the string to set the parameter to
-	Value interface{} `json:"value,omitempty"`
+	Value string `json:"value,omitempty"`
 
 	// ForceSendFields is a list of field names (e.g. "UseInAppDefault") to
 	// unconditionally include in API requests. By default, fields with
