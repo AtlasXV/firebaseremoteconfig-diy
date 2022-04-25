@@ -142,6 +142,8 @@ type RemoteConfig struct {
 
 	ParameterGroups map[string]map[string]map[string]RemoteConfigParameter `json:"parameterGroups,omitempty"`
 
+	Version RemoteConfigVersion `json:"version"`
+
 	// ServerResponse contains the HTTP response code and headers from the
 	// server.
 	googleapi.ServerResponse `json:"-"`
@@ -258,9 +260,7 @@ type RemoteConfigParameter struct {
 	// highest priority (the one listed first in the conditions array)
 	// determines
 	// the value of this parameter.
-	ConditionalValues map[string]RemoteConfigParameterValue `json:"conditionalValues,omitempty"`
-
-	Version RemoteConfigVersion `json:"version"`
+	ConditionalValues map[string]interface{} `json:"conditionalValues,omitempty"`
 
 	// DefaultValue: Optional - value to set the parameter to, when none of
 	// the named conditions
@@ -333,6 +333,29 @@ type RemoteConfigParameterValue struct {
 
 	// Value: the string to set the parameter to
 	Value string `json:"value,omitempty"`
+
+	// ForceSendFields is a list of field names (e.g. "UseInAppDefault") to
+	// unconditionally include in API requests. By default, fields with
+	// empty values are omitted from API requests. However, any non-pointer,
+	// non-interface field appearing in ForceSendFields will be sent to the
+	// server regardless of whether the field is empty or not. This may be
+	// used to include empty fields in Patch requests.
+	ForceSendFields []string `json:"-"`
+
+	// NullFields is a list of field names (e.g. "UseInAppDefault") to
+	// include in API requests with the JSON null value. By default, fields
+	// with empty values are omitted from API requests. However, any field
+	// with an empty value appearing in NullFields will be sent to the
+	// server as null. It is an error if a field in this list has a
+	// non-empty value. This may be used to include null fields in Patch
+	// requests.
+	NullFields []string `json:"-"`
+}
+
+type RemoteConfigParameterPersonalValue struct {
+	// UseInAppDefault: if true, omit the parameter from the map of fetched
+	// parameter values
+	UseInAppDefault bool `json:"useInAppDefault,omitempty"`
 
 	PersonalizationValue RemoteConfigPersonalizationValue `json:"personalizationValue"`
 
