@@ -277,7 +277,7 @@ type RemoteConfigParameter struct {
 	// A description may contain any Unicode characters
 	Description string `json:"description,omitempty"`
 
-	ValueType string `json:"value_type"`
+	ValueType string `json:"valueType"`
 
 	// ForceSendFields is a list of field names (e.g. "ConditionalValues")
 	// to unconditionally include in API requests. By default, fields with
