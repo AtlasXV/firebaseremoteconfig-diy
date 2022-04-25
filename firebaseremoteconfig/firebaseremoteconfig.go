@@ -11,6 +11,7 @@ import (
 	"net/url"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/AtlasXV/firebaseremoteconfig-diy/gensupport"
 	"google.golang.org/api/googleapi"
@@ -259,6 +260,8 @@ type RemoteConfigParameter struct {
 	// the value of this parameter.
 	ConditionalValues map[string]RemoteConfigParameterValue `json:"conditionalValues,omitempty"`
 
+	Version RemoteConfigVersion `json:"version"`
+
 	// DefaultValue: Optional - value to set the parameter to, when none of
 	// the named conditions
 	// evaluate to <code>true</code>.
@@ -273,6 +276,8 @@ type RemoteConfigParameter struct {
 	// java/com/google/wireless/android/config/ConstsExporter.java).
 	// A description may contain any Unicode characters
 	Description string `json:"description,omitempty"`
+
+	ValueType string `json:"value_type"`
 
 	// ForceSendFields is a list of field names (e.g. "ConditionalValues")
 	// to unconditionally include in API requests. By default, fields with
@@ -298,6 +303,18 @@ func (s *RemoteConfigParameter) MarshalJSON() ([]byte, error) {
 	return gensupport.MarshalJSON(raw, s.ForceSendFields, s.NullFields)
 }
 
+type RemoteConfigVersion struct {
+	VersionNumber string                 `json:"versionNumber"`
+	UpdateTime    time.Time              `json:"updateTime"`
+	UpdateUser    RemoteConfigUpdateUser `json:"updateUser"`
+	UpdateOrigin  string                 `json:"updateOrigin"`
+	UpdateType    string                 `json:"updateType"`
+}
+
+type RemoteConfigUpdateUser struct {
+	Email string `json:"email"`
+}
+
 // RemoteConfigParameterValue: A RemoteConfigParameter's "value" (either
 // the default value, or the value
 // associated with a condition name) is either a string, or
@@ -317,6 +334,8 @@ type RemoteConfigParameterValue struct {
 	// Value: the string to set the parameter to
 	Value string `json:"value,omitempty"`
 
+	PersonalizationValue RemoteConfigPersonalizationValue `json:"personalizationValue"`
+
 	// ForceSendFields is a list of field names (e.g. "UseInAppDefault") to
 	// unconditionally include in API requests. By default, fields with
 	// empty values are omitted from API requests. However, any non-pointer,
@@ -333,6 +352,10 @@ type RemoteConfigParameterValue struct {
 	// non-empty value. This may be used to include null fields in Patch
 	// requests.
 	NullFields []string `json:"-"`
+}
+
+type RemoteConfigPersonalizationValue struct {
+	PersonalizationId string `json:"personalizationId"`
 }
 
 func (s *RemoteConfigParameterValue) MarshalJSON() ([]byte, error) {
